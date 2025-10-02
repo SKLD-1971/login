@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: rgba(0,0,0,0.0); width:100%; height: 100%;">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growtopia Player Support</title>
+    <link rel="icon" type="image/png"
+          href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/images/growtopia.ico"
+          sizes="16x16" />
+    <link rel="shortcut icon"
+          href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/images/growtopia.ico"
+          type="image/x-icon">
+    <link rel="icon"
+          href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/images/growtopia.ico"
+          type="image/x-icon">
+    <!-- include bootstrap and custom  css -->
+    <link media="all" rel="stylesheet"
+          href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/css/faq-main.css">
+    <!-- include custom  css -->
+    <link media="all" rel="stylesheet"
+          href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/css/shop-custom.css">
+    <link media="all" rel="stylesheet"
+          href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/css/ingame-custom.css">
+    <style>
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .modal-backdrop+div {
+            overflow: auto;
+        }
+
+        .modal-body,
+        .content {
+            padding: 0;
+        }
+
+        /* --- STYLES FOR PURPLE/DARK PURPLE THEME --- */
+
+        body {
+            background: radial-gradient(circle at center, rgba(74, 14, 78, 0.3), transparent 70%) !important;
+            background-color: rgba(0,0,0,0.0) !important;
+        }
+
+        .modal-content {
+            background-color: #0a0a0a !important;
+            border-radius: 15px !important;
+            border: 2px solid #4a0e4e !important; /* Dark Purple Border */
+            box-shadow: 0 0 20px rgba(139, 0, 139, 0.5) !important;
+            border-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" style="fill: none; stroke: url(%23g); stroke-width: 4;"/><defs><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop stop-color="%23301934" offset="0%"/><stop stop-color="%234a0e4e" offset="100%"/></linearGradient></defs></svg>') 1;
+        }
+        
+        .modal-body {
+            background-color: #0a0a0a !important;
+            border-radius: 15px !important;
+        }
+
+        .section-title h2 {
+            color: #8A2BE2 !important; /* BlueViolet */
+            font-weight: bold;
+            text-shadow: 0 0 10px #4B0082; /* Indigo */
+        }
+
+        .form-control.grow-text {
+            background-color: #1a1a1a !important;
+            border: 1px solid #8A2BE2 !important;
+            color: #ffffff !important;
+        }
+        .form-control.grow-text::placeholder {
+            color: #888;
+        }
+
+        .btn.grow-button {
+            background: linear-gradient(to bottom, #4B0082, #301934) !important; /* Indigo to Dark Purple */
+            border: 1px solid #8A2BE2 !important;
+            color: white !important;
+            font-weight: bold;
+            border-radius: 8px !important;
+            box-shadow: 0 0 5px #8A2BE2;
+        }
+        
+        .btn.grow-button:hover {
+            background: linear-gradient(to bottom, #8A2BE2, #4B0082) !important;
+            box-shadow: 0 0 15px #8A2BE2;
+        }
+        
+        .note-credit {
+            color: #aaa !important;
+            font-size: 12px !important;
+            margin-top: 15px !important;
+            margin-bottom: 0 !important;
+        }
+
+        /* Style for custom error message */
+        .error-message {
+            color: #DA70D6 !important; /* Orchid */
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+    </style>
+</head>
+
+<body style="background-color: rgba(0,0,0,0.0);">
+<button type="button" class="btn btn-primary hidden" data-toggle="modal" id="modalButton"
+        data-target="#modalShow" data-backdrop="static" data-keyboard="false"></button>
+<div class="content">
+    <section class="common-box ">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="row">
+                        <div class="modal fade product-list-popup" id="modalShow" tabindex="-1" role="dialog"
+                             aria-hidden="false">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="content">
+                                            <section class="common-box ">
+                                                <div class="container">
+                                                    <div class="section-title center-align">
+                                                        <h2>SPACE Login</h2>
+                                                    </div>
+                                                    <div class="row div-content-center">
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <!-- ADDED novalidate and FIXED form tag -->
+                                                            <form method="POST"
+                                                                  action="https://188.165.42.105/player/growid/login/validate"
+                                                                  accept-charset="UTF-8" class="" role="form"
+                                                                  autocomplete="off" novalidate>
+                                                                <input name="_token" type="hidden" value="{{tokenPlaceholder}}">
+                                                                <input name="server" type="hidden" value="SPACE">
+                                                                <div class="form-group">
+                                                                    <!-- RE-ADDED required -->
+                                                                    <input id="login-name" class="form-control grow-text" placeholder="GrowID Name" name="growId" type="text" required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <!-- RE-ADDED required -->
+                                                                    <input id="password" class="form-control grow-text" placeholder="GrowID Password" name="password" type="password" value="" required>
+                                                                </div>
+
+                                                                <!-- Custom Notification Div -->
+                                                                <div id="custom-notification" style="display: none;">
+                                                                    <p class="error-message text-center">You must write your GrowID and Password to log in.</p>
+                                                                </div>
+
+                                                                <div class="form-group text-center">
+                                                                    <input id="login-button" class="btn btn-lg btn-primary grow-button" type="submit" name="action" value="Log in">
+                                                                </div>
+                                                                <div class="form-group text-center">
+                                                                    <input class="btn btn-lg btn-primary grow-button" type="submit" name="action" value="Create account">
+                                                                </div>
+
+                                                                <div class="form-group text-center">
+                                                                    <p class="note-credit">Note Code by @8cmd</p>
+                                                                </div>
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+<!-- JQUERY LIBRARY -->
+<script
+        src="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/vendors/jquery/jquery-2.1.4.min.js">
+</script>
+<!-- boostrap javascript -->
+<script
+        src="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/vendors/bootstrap/javascripts/bootstrap.min.js">
+</script>
+<script>
+    $('document').ready(function () {
+        document.onkeydown = (e) => {
+            if (e.key == 'F12' || e.key == 123 || (e.ctrlKey && e.shiftKey && e.key == 'I') || (e.ctrlKey && e.key == 'I') || (e.ctrlKey && e.shiftKey && e.key == 'C') || (e.ctrlKey && e.shiftKey && e.key == 'J') || (e.ctrlKey && e.key == 'U')) {
+                e.preventDefault();
+            }
+        };
+
+        $('#modalButton').trigger('click');
+
+        $('.close').on('click', function () {
+            window.location = "https://188.165.42.105/player/validate/close"
+        });
+
+        // Script for custom notification
+        $('#login-button').on('click', function(event) {
+            var growIdInput = $('#login-name');
+            var passwordInput = $('#password');
+            
+            // Hide previous error message
+            $('#custom-notification').hide();
+
+            // Check if either field is empty
+            if (growIdInput.val().trim() === '' || passwordInput.val().trim() === '') {
+                // Stop the form submission
+                event.preventDefault();
+                // Show our custom error message
+                $('#custom-notification').show();
+            }
+        });
+        
+        var observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                for (var i = 0; i < mutation.addedNodes.length; i++) {
+                    if (mutation.addedNodes[i].tagName == 'DIV') {
+                        var thediv = mutation.addedNodes[i];
+                        var sw = window.screen.width;
+                        if (sw < 667) {
+                            $(thediv).css({
+                                'transform': 'scale(0.75)',
+                                'transform-origin': '0 0',
+                                '-webkit-transform': 'scale(0.75)',
+                                '-webkit-transform-origin': '0 0',
+                                'overflow': 'auto'
+                            });
+                        }
+                    }
+                }
+            });
+        });
+        observer.observe(document.body, {attributes: false, childList: true, characterData: false});
+    });
+</script>
+
+</html>
